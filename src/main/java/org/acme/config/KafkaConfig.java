@@ -15,30 +15,39 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import java.util.Properties;
 
+/**
+ * @author Akhil
+ *
+ * {@link KafkaConfig} class provides the customized configurations to connect with Producer and Consumer.
+ */
 @ApplicationScoped
 public class KafkaConfig {
 
     @ConfigProperty(name = "app.kafka.bootstrap-servers", defaultValue = "localhost:9092")
-    private String kafkaBrokers;
+    String kafkaBrokers;
 
     @ConfigProperty(name = "app.producer.acks", defaultValue = "1")
-    private String acks;
+    String acks;
 
     @ConfigProperty(name = "app.consumer.groupId", defaultValue = "kafka-client-quarkus-consumer")
-    private String consumerGroupId;
+    String consumerGroupId;
 
     @ConfigProperty(name = "app.consumer.clientId", defaultValue = "kafka-client-quarkus-consumer-client")
-    private String consumerClientId;
+    String consumerClientId;
 
     @ConfigProperty(name = "app.consumer.maxPoolRecords", defaultValue = "1000")
-    private String maxPoolRecords;
+    String maxPoolRecords;
 
     @ConfigProperty(name = "app.consumer.offsetReset", defaultValue = "earliest")
-    private String offsetReset;
+    String offsetReset;
 
     @ConfigProperty(name = "app.consumer.autoCommit", defaultValue = "false")
     String autoCommit;
 
+    /**
+     * This method provides the Kafka Producer Configurations.
+     * @return {@link Producer}
+     */
     @Produces
     @RequestScoped
     public Producer<String, String> createProducer() {
@@ -50,6 +59,10 @@ public class KafkaConfig {
         return new KafkaProducer<>(props);
     }
 
+    /**
+     * This method provides the Kafka Producer Configurations.
+     * @return {@link Consumer}
+     */
     @Produces
     @RequestScoped
     public Consumer<String, String> createConsumer() {
