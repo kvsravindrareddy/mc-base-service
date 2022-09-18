@@ -14,10 +14,10 @@ import javax.inject.Singleton;
 public class MessageService {
 
     @Inject
-    private Producer<String, String> producer;
+    Producer<String, String> producer;
 
     @Inject
-    private Consumer<String, String> consumer;
+    Consumer<String, String> consumer;
 
     public void publisMessage(final @NotEmpty String topicName,
                                 final @NotNull String message) {

@@ -16,11 +16,11 @@ import javax.ws.rs.core.MediaType;
 public class ProducerController {
 
     @Inject
-    private MessageService messageService;
+    MessageService messageService;
 
     @POST
-    @Path("/kafka/{topicName}")
-    public void sendToTopic(@PathParam("topicName")String topicName) {
-        messageService.publisMessage(topicName, "hello");
+    @Path("/kafka")
+    public void sendToTopic() {
+        messageService.publisMessage("test-quarkustopic-one", "hello");
     }
 }
